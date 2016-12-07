@@ -1,0 +1,110 @@
+﻿@model IEnumerable<WebApplication1.Models.DB.User>
+
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+    <style type="text/css">
+        .table-bordered th, td {
+            text-align: center;
+        }
+    </style>
+                      <script src="~/Scripts/jquery-1.12.3.js"></script>
+                      <script src="~/Scripts/jquery.dataTables.min.js"></script> 
+                      <link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+    <h2>List User</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+              <tr>
+                <th>
+                    Agent ID
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    IC No.
+                </th>
+                <th>
+                    E-Point
+                </th>
+                <th>
+                    R-Point
+                </th>
+                <th>
+                    Bonus Star
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+            </thead>
+            Total User : @Model.Count()
+            <hr />
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IC)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Epoint)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rpoint)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BonusStar)
+                    </td>
+                    <td>
+                        @if (item.StatusID == 2)
+                        {
+                            <span class="label label-success"> @Html.DisplayFor(modelItem => item.Ref_Status.Description) </span>
+                        }
+                        else if (item.StatusID == 1)
+                        {
+                            <span class="label label-default"> @Html.DisplayFor(modelItem => item.Ref_Status.Description) </span>
+                        }
+                        else
+                        {
+                            <span class="label label-danger"> @Html.DisplayFor(modelItem => item.Ref_Status.Description) </span>
+                        }
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ref_Role.Description)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID })
+                    </td>
+                </tr>
+
+            }
+
+        </tbody>
+
+    </table>

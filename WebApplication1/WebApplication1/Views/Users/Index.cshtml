@@ -1,0 +1,18 @@
+﻿@model WebApplication1.Models.DB.User 
+
+@{
+    ViewBag.Title = "Dashboard";
+} 
+<hr />
+
+<div class="jumbotron">
+    <h1>Welcome, @Html.DisplayFor(model => model.Name)</h1>
+    <h3>Total Sales  <span class="label label-primary">@Html.DisplayFor(model => model.BonusStar)</span></h3>
+
+   </div>
+<div class="page-header">
+    <h3>POINT <small>Summary</small></h3>
+</div>
+<h5>E-Point <span class="label label-info">@Html.DisplayFor(model => model.Epoint)</span></h5>
+<h5>R-Point <span class="label label-info">@Html.DisplayFor(model => model.Rpoint)</span></h5>
+<h5>Bonus Star <span class="label label-primary">@Html.DisplayFor(model => model.BonusStar)</span></h5> 

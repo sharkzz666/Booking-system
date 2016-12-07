@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WebApplication1.Models.DB.Purchase>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+
+</p>
+
+<div class="page-header">
+    <h2>Redeem Summary</h2>
+    @Html.ActionLink("Add New", "Create")
+</div>
+<table class="table">
+    <tr>
+        <th>
+
+            @Html.DisplayNameFor(model => model.Product.NameProduct)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Username)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.NameProduct)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+
+            </td>
+            <td>
+                <span class="label label-info">@Html.DisplayFor(modelItem => item.StatusID)</span>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Username)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

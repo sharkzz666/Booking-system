@@ -1,0 +1,129 @@
+﻿@model WebApplication1.Models.DB.User
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ParentID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParentID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Epoint)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Epoint)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rpoint)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rpoint)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BonusStar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BonusStar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_Role.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ref_Role.Description)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

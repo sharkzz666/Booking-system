@@ -1,0 +1,72 @@
+﻿@model WebApplication1.Models.DB.Purchase
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Purchase</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StatusID)
+        </dt>
+
+        <dd>
+          
+            @if (Model.StatusID == 2)
+            {
+                <span class="label label-success"> @Html.DisplayFor(model => model.Ref_Status.Description) </span>
+            }
+            else if (Model.StatusID == 4)
+            {
+                <span class="label label-danger"> @Html.DisplayFor(model => model.Ref_Status.Description) </span>
+            }
+            else
+            {
+                <span class="label label-default"> @Html.DisplayFor(model => model.Ref_Status.Description) </span>
+            }
+
+</dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.NameProduct)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.NameProduct)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Username)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |*@
+    @Html.ActionLink("Back to List", "Index", new { @id = Session["UserID"] })
+</p>

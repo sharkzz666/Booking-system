@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pook Teh</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <style type="text/css">
+        .table-responsive
+{
+    overflow-x: auto;
+}
+
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Pook Teh", "Index", "Users", new { @id = Session["UserID"] }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right"> 
+                    <li><a href=@Url.Action("Details", "Users", new { @id = Session["UserID"] })>Profile</a></li>
+                    <li><a href=@Url.Action("Index", "Purchases", new { @id = Session["UserID"] })>Purchase</a></li>
+                    <li><a href=@Url.Action("Index", "Placement", new { @id = Session["UserID"] })>Placement</a></li>
+                    <li><a href=@Url.Action("Index", "Products", new { @id = Session["UserID"] })>Products</a></li>
+                    <li><a href=@Url.Action("Home", "Redeem", new { @id = Session["UserID"] })>Redeem</a></li> 
+                    <li>@Html.ActionLink("Sign Out", "Logout", "Account/Logout")</li> 
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer> 
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

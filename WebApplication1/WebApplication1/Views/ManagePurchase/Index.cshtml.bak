@@ -1,0 +1,86 @@
+﻿@model PagedList.IPagedList<WebApplication1.Models.DB.Purchase>
+@using PagedList.Mvc;
+@using PagedList;
+
+@{
+    ViewBag.Title = "Manage Purchase";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>List Purchase</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+           Name
+        </th>
+        <th>
+            Product Name
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.RID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.NameProduct)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            RM&nbsp;@Html.DisplayFor(modelItem => item.Product.Price)
+        </td>
+
+        <td>
+            @if (item.StatusID == 2)
+                {
+                <span class="label label-success"> @Html.DisplayFor(modelItem => item.Ref_Status.Description) </span>
+            }
+            else if (item.StatusID == 1)
+            {
+                <span class="label label-default"> @Html.DisplayFor(modelItem => item.Ref_Status.Description) </span>
+            }
+            else
+            {
+                <span class="label label-danger"> @Html.DisplayFor(modelItem => item.Ref_Status.Description) </span>
+            }
+
+        </td>
+
+
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

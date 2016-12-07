@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c7210d816ada4aaca79e2ccf3f5856b7" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="pooktehlurosModel.Product" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="pooktehlurosModel.Purchase" Width="1.5" PointX="7" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="pooktehlurosModel.Ref_ProductType" Width="1.5" PointX="1.125" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="pooktehlurosModel.Ref_Role" Width="1.5" PointX="2.5" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="pooktehlurosModel.Ref_Status" Width="1.5" PointX="6.375" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="pooktehlurosModel.User" Width="1.5" PointX="3.5" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="pooktehlurosModel.FK_Purchase_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="pooktehlurosModel.FK_Purchase_Ref_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="pooktehlurosModel.FK_Purchase_User" ManuallyRouted="false" />
+        <AssociationConnector Association="pooktehlurosModel.FK_User_Ref_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="pooktehlurosModel.FK_User_Ref_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="pooktehlurosModel.FK_Product_Ref_ProductType" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

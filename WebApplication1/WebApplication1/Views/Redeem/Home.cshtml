@@ -1,0 +1,49 @@
+﻿@model IEnumerable<WebApplication1.Models.DB.Product>
+
+@{
+    ViewBag.Title = "List Product Reedem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List Product Reedem</h2>
+
+@Html.ActionLink("List Reedem Item ", "PurchaseReedem", new { @id = Session["UserID"] })
+<hr/>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NameProduct)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ref_ProductType.Description)
+        </th>
+        <th>
+            Reedem Point
+        </th>
+        <th>Action </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImageURL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameProduct)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ref_ProductType.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RPoint)
+        </td>
+        <td>
+            <a href=@Url.Action("Create/" + item.ID, "Redeem", null)>Reedem Product</a> 
+        </td>
+    </tr>
+}
+
+</table>

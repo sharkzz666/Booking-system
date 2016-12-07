@@ -1,0 +1,17 @@
+﻿#OrgChart {
+    text-align: center;
+}
+
+.job {
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid black;
+  width: 15em;
+}
+.line {
+  padding-left: 50%;
+  margin-right: auto;
+  border-left: 1px solid black;
+  width: 0px;
+  height: 4em;
+}

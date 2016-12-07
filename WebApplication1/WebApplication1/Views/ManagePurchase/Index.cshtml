@@ -1,0 +1,109 @@
+﻿@model IEnumerable<WebApplication1.Models.DB.Purchase>
+
+
+@{
+    ViewBag.Title = "Manage Purchase";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>List Purchase</h2>
+
+<script src="~/Scripts/jquery-1.12.3.js"></script>
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+</script>
+
+
+<p>
+</p>
+<table id="example" class="display" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>
+            ID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Product Name
+            </th>
+            <th>
+                Purchase Type
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+        </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.RID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.NameProduct)
+                </td>
+                <td>
+                    @if (item.Product.ProductTypeID == 1)
+                    {
+                        <p> Product </p>
+                    }
+                    else
+                    {
+                        <p>Redeem</p>
+                    }
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    RM&nbsp;@Html.DisplayFor(modelItem => item.Product.Price)
+                </td>
+
+                <td>
+                    @if (item.StatusID == 2)
+                    {
+                        <span class="label label-success"> @Html.DisplayFor(modelItem => item.Ref_Status.Description) </span>
+                    }
+                    else if (item.StatusID == 1)
+                    {
+                        <span class="label label-default"> @Html.DisplayFor(modelItem => item.Ref_Status.Description) </span>
+                    }
+                    else
+                    {
+                        <span class="label label-danger"> @Html.DisplayFor(modelItem => item.Ref_Status.Description) </span>
+                    }
+
+                </td>
+
+
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

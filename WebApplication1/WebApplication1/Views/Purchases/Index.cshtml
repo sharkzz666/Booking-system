@@ -1,0 +1,80 @@
+﻿@model IEnumerable<WebApplication1.Models.DB.Purchase>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h2>Purchase Summary</h2>
+    @Html.ActionLink("Buy Product", "Create")
+</div>
+<table class="table">
+    <tr>
+        <th>
+            
+            @Html.DisplayNameFor(model => model.Product.NameProduct)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+           
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+           
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Username)
+        </th>
+        <th>
+            Date
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.NameProduct)
+            
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+           
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+            
+        </td>
+        <td>
+            @if (item.StatusID == 1)
+            {
+                <span class="label label-default"> @Html.DisplayFor(modelItem => item.Ref_Status.Description) </span>
+            }
+            else if (item.StatusID == 2)
+            {
+                <span class="label label-success"> @Html.DisplayFor(modelItem => item.Ref_Status.Description) </span>
+            }
+            else if (item.StatusID == 4)
+            {
+                <span class="label label-danger"> @Html.DisplayFor(modelItem => item.Ref_Status.Description) </span>
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Datecreate)
+        </td>
+
+      
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
