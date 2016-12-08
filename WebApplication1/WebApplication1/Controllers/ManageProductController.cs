@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models.DB;
+using System.IO;
 
 namespace WebApplication1.Controllers
 {
@@ -47,10 +48,19 @@ namespace WebApplication1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ProductTypeID,NameProduct,Description,Price,RPoint,ImageURL")] Product product)
+        public ActionResult Create([Bind(Include = "ID,ProductTypeID,NameProduct,Description,Price,RPoint,ImageURL")] Product product, HttpPostedFileBase fileimage)
         {
             if (ModelState.IsValid)
             {
+                if (fileimage != null && fileimage.ContentLength > 0)
+                {
+                    var namafile = Path.GetFileName(fileimage.FileName);
+                    var path = Path.Combine(Server.MapPath("~/images/Product"), namafile);
+                    fileimage.SaveAs(path);
+
+                    product.ImageURL = Url.Content("~/images/Product" + namafile);
+                    product.ImageURL = namafile;
+                }
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");

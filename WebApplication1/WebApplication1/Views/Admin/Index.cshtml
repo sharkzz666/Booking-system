@@ -4,11 +4,38 @@
         ViewBag.Title = "Index";
         Layout = "~/Views/Shared/_AdminLayout.cshtml";
     }
-    <style type="text/css">
-        .table-bordered th, td {
+<style type="text/css">
+    #test {
+        color: white;
+    }
+    .navbar-xs { min-height:20px; height: 20px; background-color: #3e3e3e;color: white; }
+             .table-bordered th, td {
             text-align: center;
         }
-    </style>
+</style>
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Admin" , new { @id = Session["UserID"]})"><span class="glyphicon glyphicon-home"></span></a></li>
+        <li class="active">Manage User</li>
+    </ol>
+    <ul class="nav navbar-nav navbar-left">
+        <li>
+            <p>
+                <button class="btn btn-default" type="button">
+                    Total User : <span class="badge">@Model.Count()</span>
+                </button>
+                
+            </p>
+        </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <p>
+                <a class="btn btn-default btn-primary btn-sm" href="@Url.Action("Create","Admin")" role="button"><span class="glyphicon glyphicon-plus"></span> Create New</a>
+            </p> 
+        </li>
+    </ul>
+</div>
                       <script src="~/Scripts/jquery-1.12.3.js"></script>
                       <script src="~/Scripts/jquery.dataTables.min.js"></script> 
                       <link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -17,15 +44,16 @@
         $(document).ready(function () {
             $('#example').DataTable();
         });
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
     </script>
-    <h2>List User</h2>
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table id="example" class="display" cellspacing="0" width="100%">
+   
+<hr />
+    <table id="example" class="display" cellspacing="0" style="width:100%;">
         <thead>
-              <tr>
+            <tr>
                 <th>
                     Agent ID
                 </th>
@@ -54,9 +82,8 @@
                     Action
                 </th>
             </tr>
-            </thead>
-            Total User : @Model.Count()
-            <hr />
+        </thead>
+
         <tbody>
             @foreach (var item in Model)
             {
@@ -80,9 +107,12 @@
                         @Html.DisplayFor(modelItem => item.BonusStar)
                     </td>
                     <td>
+                        
+
                         @if (item.StatusID == 2)
                         {
                             <span class="label label-success"> @Html.DisplayFor(modelItem => item.Ref_Status.Description) </span>
+                           
                         }
                         else if (item.StatusID == 1)
                         {
@@ -98,8 +128,11 @@
                         @Html.DisplayFor(modelItem => item.Ref_Role.Description)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.ID })
+                        <p>
+                            <a class="btn btn-default btn-primary btn-xs" href="@Url.Action("Edit", "Admin", new { id = item.ID })" role="button" data-toggle="tooltip" title="Edit User"><span class="glyphicon glyphicon-cog"></span></a>
+                            <a class="btn btn-default btn-info btn-xs" href="@Url.Action("Details", "Admin", new { id = item.ID })" role="button" data-toggle="tooltip" title="Information User"><span class="glyphicon glyphicon-info-sign"></span></a>
+                            <a class="btn btn-default btn-danger btn-xs" href="@Url.Action("Delete", "Admin", new { id = item.ID })" role="button" data-toggle="tooltip" title="Delete User"><span class="glyphicon glyphicon-remove-sign"></span></a>
+                        </p>
                     </td>
                 </tr>
 
@@ -108,3 +141,9 @@
         </tbody>
 
     </table>
+<br />
+<nav class="navbar navbar-xs navbar-fixed-bottom">
+    <div class="container">
+       <p>Copyright &copy; RCCO </p>
+    </div>
+</nav>

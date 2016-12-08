@@ -4,8 +4,12 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
-<h2>Details</h2>
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Admin", new { @id = Session["UserID"]})"><span class="glyphicon glyphicon-home"></span></a></li>
+        <li class="active">Detail User</li>
+    </ol>
+</div>
 
 <div>
     <h4>User</h4>

@@ -5,9 +5,31 @@
     ViewBag.Title = "Manage Purchase";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Admin", new { @id = Session["UserID"]})"><span class="glyphicon glyphicon-home"></span></a></li>
+        <li class="active">Manage Purchase</li>
+    </ol>
+    <ul class="nav navbar-nav navbar-left">
+        <li>
+            <p>
+                <button class="btn btn-default" type="button">
+                    Total Purchases : <span class="badge">@Model.Count()</span>
+                </button>
+           
 
-<h2>List Purchase</h2>
-
+            </p>
+        </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <p>
+                <a class="btn btn-default btn-primary btn-sm" href="@Url.Action("Create","Admin")" role="button"><span class="glyphicon glyphicon-plus"></span> Create New</a>
+            </p>
+        </li>
+    </ul>
+</div>
+<hr />
 <script src="~/Scripts/jquery-1.12.3.js"></script>
 <script src="~/Scripts/jquery.dataTables.min.js"></script>
 <link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -21,7 +43,7 @@
 
 <p>
 </p>
-<table id="example" class="display" cellspacing="0" width="100%">
+<table id="example" class="display" cellspacing="0" style="width:100%;">
     <thead>
         <tr>
             <th>

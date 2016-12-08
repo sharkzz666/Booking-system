@@ -4,12 +4,31 @@
     <meta name="viewport" content="width=device-width" />
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 
     <title>@ViewBag.Title</title>
+    <style type="text/css">
+        .navbar {
+            font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
+            font-weight:500;
+        }
+    #sizegambar {
+    width:104px;
+    height:64px;
+    }
+    #navbar-header-admin {
+        font-family: Calibri,Candara,Segoe,"Segoe UI",Optima,Arial,sans-serif;
+        font-weight: bold;
+        text-rendering: optimizeSpeed;
+        text-decoration-color: aqua;
+    }
+        </style>
 </head>
 
 <body>
-    <div class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -17,21 +36,32 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application", "Index", "Admin", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("RCCO", "Index", "Admin", new { area = ""}, new { @class = "navbar-brand", id = "navbar-header-admin" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href=@Url.Action("Index", "Admin", new { @id = Session["UserID"] })>Manage User</a></li>
                     <li><a href=@Url.Action("Index", "ManagePurchase", new { @id = Session["UserID"] })>Manage Purchase</a></li>
                     <li><a href=@Url.Action("Index", "ManageProduct", new { @id = Session["UserID"] })>Manage Product</a></li>
-                    <li>@Html.ActionLink("Sign Out", "Logout", "Account/Logout")</li>
+
+                    <li class="dropdown">
+                        <a href="@Url.Action("Index","Admin")" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>&nbsp; User <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("Details","Admin", new { @id = Session["UserID"] })"><span class="glyphicon glyphicon-cog"></span>&nbsp; Profile</a></li>
+                                <li><a href="@Url.Action("Logout","Account")"><span class="glyphicon glyphicon-off"></span>&nbsp; Log Out</a></li>
+                            </ul>
+</li>
                 </ul>
             </div>
         </div>
     </div>
- 
+    <br />
+
         <div class="container">
+
             @RenderBody()
+
         </div>
-    </body>
+
+</body>
 </html>

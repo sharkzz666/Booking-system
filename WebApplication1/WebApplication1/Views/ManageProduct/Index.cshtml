@@ -4,69 +4,114 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Admin", new { @id = Session["UserID"]})"><span class="glyphicon glyphicon-home"></span></a></li>
+        <li class="active">Manage Product</li>
+    </ol>
+    <ul class="nav navbar-nav navbar-left">
+        <li>
+            <p>
+                <button class="btn btn-default" type="button">
+                    Total Product : <span class="badge">@Model.Count()</span>
+                </button>
 
-<h2>Manage Product</h2>
+            </p>
+        </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <p>
+                <a class="btn btn-default btn-primary btn-sm" href="@Url.Action("Create","ManageProduct")" role="button"><span class="glyphicon glyphicon-plus"></span> Create New</a>
+            </p>
+        </li>
+    </ul>
+</div>
+<hr />
+<script src="~/Scripts/jquery-1.12.3.js"></script>
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+</script>
+<table id="example" class="display" cellspacing="0" style="width:100%;" >
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageURL)
+            </th>
+            <th>
+                ProductType
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameProduct)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RPoint)
+            </th>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            ProductType
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NameProduct)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RPoint)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageURL)
-        </th>
-        <th></th>
-    </tr>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (item.ImageURL == "")
+                    {
+                        <b>invalid format</b>
+                    }
+                    else
+                    {
+                        <a href="@Url.Content("~/images/Product/" + item.ImageURL)" target="_blank">
+                            <img src="@Url.Content("~/images/Product/" + item.ImageURL)" class="img-thumbnail" id="sizegambar" alt="Responsive-image" />
+                        </a>
+                    }
+                </td>
+                <td>
+                    @if (item.ProductTypeID == 1)
+                    {
+                        <p> Product </p>
+                    }
+                    else
+                    {
+                        <p>Redeem</p>
+                    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @if (item.ProductTypeID == 1)
-            {
-               <p> Product </p>
-            }
-            else
-            {
-                <p>Redeem</p>
-            }
-
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NameProduct)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RPoint)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImageURL)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
-
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameProduct)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RPoint)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+<footer>
+    footer
+</footer>
