@@ -21,6 +21,7 @@ namespace WebApplication1.Models.DB
         public string Description { get; set; }
         public Nullable<int> Quantity { get; set; }
         public Nullable<System.DateTime> Datecreate { get; set; }
+        public string Attachment { get; set; }
     
         public virtual Product Product { get; set; }
         public virtual Ref_Status Ref_Status { get; set; }

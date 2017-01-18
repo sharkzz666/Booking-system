@@ -11,6 +11,8 @@
     <Property Name="Price" Type="numeric" Precision="18" Scale="2" />
     <Property Name="RPoint" Type="int" />
     <Property Name="ImageURL" Type="nvarchar" MaxLength="250" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="UserID" Type="bigint" />
   </EntityType>
   <EntityType Name="Purchase">
     <Key>
@@ -23,6 +25,7 @@
     <Property Name="Description" Type="nvarchar" MaxLength="250" />
     <Property Name="Quantity" Type="int" />
     <Property Name="Datecreate" Type="datetime" />
+    <Property Name="Attachment" Type="nvarchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="Ref_ProductType">
     <Key>
@@ -42,7 +45,7 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="bigint" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="User">
@@ -98,9 +101,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Purchase_Ref_Status">
-    <End Role="Ref_Status" Type="Self.Ref_Status" Multiplicity="0..1">
-      <OnDelete Action="Cascade" />
-    </End>
+    <End Role="Ref_Status" Type="Self.Ref_Status" Multiplicity="0..1" />
     <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Ref_Status">

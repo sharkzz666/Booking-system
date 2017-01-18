@@ -13,6 +13,8 @@
     <Property Name="ImageURL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Purchases" Relationship="Self.FK_Purchase_Product" FromRole="Product" ToRole="Purchase" />
     <NavigationProperty Name="Ref_ProductType" Relationship="pooktehlurosModel.FK_Product_Ref_ProductType" FromRole="Product" ToRole="Ref_ProductType" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int64" />
   </EntityType>
   <EntityType Name="Purchase">
     <Key>
@@ -28,6 +30,7 @@
     <NavigationProperty Name="Ref_Status" Relationship="Self.FK_Purchase_Ref_Status" FromRole="Purchase" ToRole="Ref_Status" />
     <NavigationProperty Name="User" Relationship="Self.FK_Purchase_User" FromRole="Purchase" ToRole="User" />
     <Property Name="Datecreate" Type="DateTime" Precision="3" Nullable="true" />
+    <Property Name="Attachment" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Ref_ProductType">
     <Key>
