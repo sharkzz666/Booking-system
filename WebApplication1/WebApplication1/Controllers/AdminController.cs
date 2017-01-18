@@ -8,7 +8,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models.DB;
-
+using System.Web.UI.WebControls;
+using System.Web.UI;
+using System.IO;
 
 namespace WebApplication1.Controllers
 {
@@ -40,7 +42,7 @@ namespace WebApplication1.Controllers
         // GET: Admin/Create
         public ActionResult Create()
         {
-          
+
 
             ViewBag.RoleID = new SelectList(db.Ref_Role, "ID", "Description");
             ViewBag.StatusID = new SelectList(db.Ref_Status, "ID", "Description");
@@ -54,8 +56,8 @@ namespace WebApplication1.Controllers
             };
 
             return View(DetailUpdate);
-       
-    }
+
+        }
 
         // POST: Admin/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -77,6 +79,46 @@ namespace WebApplication1.Controllers
             ViewBag.StatusID = new SelectList(db.Ref_Status, "ID", "Description", user.StatusID);
             return View(user);
         }
+         
+        public ActionResult Exportfile()
+        { 
+            var purchases =
+                from p in db.Purchases
+                join pd in db.Products on p.ProductID equals pd.ID
+                join u in db.Users on p.UserID equals u.ID
+                select new
+                            {
+                                UserID = u.RID, // or pc.ProdId
+                                DatePurchased = p.Datecreate,
+                                UserName = u.Name,
+                                ProductName = pd.NameProduct,
+                                TotalQuantity = p.Quantity,
+                                TotalPrice = (p.Quantity * pd.Price)
+                                // other assignments
+                            };
+
+
+            Random rnd = new Random();
+            int myRandomNo = rnd.Next(1000, 9999); // creates a 4 digit random no.
+
+            GridView gv = new GridView();
+
+            gv.DataSource = purchases.ToList();
+            gv.DataBind();
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment; filename=SummaryReport_" + myRandomNo + ".xls");
+            Response.ContentType = "application/ms-excel";
+            Response.Charset = "";
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+            gv.RenderControl(htw);
+            Response.Output.Write(sw.ToString());
+            Response.Flush();
+            Response.End();
+
+            return RedirectToAction("Admin");
+        }
 
         // GET: Admin/Edit/5
         public ActionResult Edit(long? id)
@@ -85,7 +127,7 @@ namespace WebApplication1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
             User user = db.Users.Find(id);
             if (user == null)
             {

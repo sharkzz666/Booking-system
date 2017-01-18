@@ -384,6 +384,7 @@
     <Content Include="Views\Redeem\PurchaseReedem.cshtml" />
     <Content Include="Views\Redeem\Create.cshtml" />
     <Content Include="Views\Redeem\Details.cshtml" />
+    <Content Include="Views\Shared\MasterLandingPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

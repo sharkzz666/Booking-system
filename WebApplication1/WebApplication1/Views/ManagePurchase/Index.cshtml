@@ -68,6 +68,12 @@
                 Status
             </th>
             <th>
+                Date Purchase
+            </th>
+            <th>
+                Parent ID
+            </th>
+            <th>
                 Action
             </th>
         </tr>
@@ -118,6 +124,13 @@
                     }
 
                 </td>
+                <td>
+                    @Html.TextBoxFor(modelItem => item.Datecreate, "{0:dd-MMM-yyyy}",  new { @class ="form-control", disabled = "disabled"})
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.ParentID)
+                </td>
+
 
 
 
